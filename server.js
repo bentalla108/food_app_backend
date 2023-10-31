@@ -6,6 +6,16 @@ const app = express()
 const port = 3000
 
 
+const admin = require("firebase-admin");
+
+const serviceAccount = require("path/to/serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+
+
 dotenv.config()
 mongoose.connect(process.env.MONGO_URL)
     .then(()=> console.log('Connected to database Succesfully...'))
