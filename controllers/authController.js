@@ -42,9 +42,6 @@ async function createUser(req, res) {
           userType: 'Client'
         });
 
-              // ******************************** A ENLEVER 
-          console.log(userResponse.uid);
-
         // Enregistrement du nouvel utilisateur dans la base de données MongoDB
         const serverResponse = await newUser.save();
 
@@ -70,7 +67,7 @@ async function loginUser(req, res) {
 
   try {
     // Recherche de l'utilisateur dans la base de données par son adresse e-mail
-    const user = await User.findOne({ email: req.body.email }, { _v: 0, createdAt: 0, updatedAt: 0 });
+    const user = await User.findOne({ email: req.body.email }, { __v: 0, createdAt: 0, updatedAt: 0 });
 
     // Si l'utilisateur n'est pas trouvé, renvoyer une réponse avec le statut 401
         // -  !user&& res.status(401).json('Wrong credentials');
@@ -99,10 +96,7 @@ async function loginUser(req, res) {
       {
         expiresIn: "21d",
       });
-    
 
-      // ******************************** A ENLEVER 
-    console.log(userToken);
 
     // Extraction des données utilisateur à envoyer dans la réponse
     const { password, email, ...otherUserData } = user._doc;
