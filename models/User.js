@@ -30,7 +30,7 @@ const UserScheme =new mongoose.Schema({
     userType :{
         type : String, 
         required : true,
-        enum : ['Admin' , 'Driver' , 'Cleint' , 'Vendor'],
+        enum : ['Admin' , 'Driver' , 'Client' , 'Vendor'],
         default : 'Client'
     },
     profile : {

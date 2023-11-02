@@ -42,8 +42,11 @@ async function createUser(req, res) {
           userType: 'Client'
         });
 
+              // ******************************** A ENLEVER 
+          console.log(userResponse.uid);
+
         // Enregistrement du nouvel utilisateur dans la base de données MongoDB
-        await newUser.save();
+        const serverResponse = await newUser.save();
 
         // Envoi d'une réponse avec le statut 201 (Created) et un message de succès
         const message = 'User created successfully.';
@@ -52,6 +55,7 @@ async function createUser(req, res) {
     } catch (error) {
       // En cas d'erreur lors de la création de l'utilisateur,
       // renvoyer une réponse avec le statut 500 (Internal Server Error)
+      console.log(error)
       res.status(500).json({ status: false, error: 'Error creating user' });
     }
   }
@@ -95,6 +99,10 @@ async function loginUser(req, res) {
       {
         expiresIn: "21d",
       });
+    
+
+      // ******************************** A ENLEVER 
+    console.log(userToken);
 
     // Extraction des données utilisateur à envoyer dans la réponse
     const { password, email, ...otherUserData } = user._doc;
