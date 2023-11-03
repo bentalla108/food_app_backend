@@ -9,6 +9,7 @@ const port = 3000
 const admin = require("firebase-admin");
 
 const authRouter = require('./routes/authRouter');
+const userRouter = require('./routes/user')
 
 const serviceAccount = require("./serviceAccountKeys.json");
 
@@ -27,4 +28,5 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/', authRouter);
+app.use('/api/users' , userRouter )
 app.listen(process.env.PORT || port, () => console.log(`Foodly server is running on port ${process.env.PORT }!`))

@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const {deleteFirebaseUser} = require('./authController');
 
 /**
  * Récupère les informations de l'utilisateur actuellement authentifié.
@@ -23,9 +24,14 @@ async function getUser(req, res) {
  */
 async function deleteUser(req, res) {
   const userId = req.user.id;
+ 
 
   try {
-    const user = await User.findByIdAndDelete(userId);
+   
+     const user = await User.findByIdAndDelete(userId);
+     await deleteFirebaseUser(user.uid);
+    
+  
     res.status(200).json({
       status: true,
       message: 'User deleted successfully',

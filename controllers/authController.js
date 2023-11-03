@@ -110,8 +110,13 @@ async function loginUser(req, res) {
   }
 }
 
+async function deleteFirebaseUser(uid) {
+  await admin.auth().deleteUser(uid);
+}
+
 // Exportation des fonctions pour les rendre disponibles pour d'autres parties de l'application
 module.exports = {
   createUser,
-  loginUser
+  loginUser,
+  deleteFirebaseUser
 };
