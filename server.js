@@ -10,6 +10,8 @@ const admin = require("firebase-admin");
 
 const authRouter = require('./routes/authRouter');
 const userRouter = require('./routes/user')
+const restaurantRouter = require('./routes/restaurant')
+const categoryRouter = require('./routes/category')
 
 const serviceAccount = require("./serviceAccountKeys.json");
 
@@ -29,4 +31,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/', authRouter);
 app.use('/api/users' , userRouter )
+app.use('/api/restaurant' , restaurantRouter )
+app.use('/api/category' , categoryRouter )
 app.listen(process.env.PORT || port, () => console.log(`Foodly server is running on port ${process.env.PORT }!`))
